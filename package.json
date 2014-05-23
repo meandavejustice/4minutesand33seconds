@@ -1,0 +1,26 @@
+{
+  "name": "4minutesand33seconds",
+  "version": "0.0.0",
+  "description": "4minutesand33seconds ====================",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/meandavejustice/4minutesand33seconds.git"
+  },
+  "author": "meandave",
+  "license": "GPL",
+  "bugs": {
+    "url": "https://github.com/meandavejustice/4minutesand33seconds/issues"
+  },
+  "homepage": "https://github.com/meandavejustice/4minutesand33seconds",
+  "dependencies": {
+    "express": "^4.0.0",
+    "logfmt": "^1.1.2",
+    "keep-alive": "^0.1.0",
+    "countdown": "^2.3.0",
+    "dropbox": "^0.10.2"
+  }
+}

@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+  <head>
+    <!-- <link rel="stylesheet" href="style.css" type="text/css" media="screen" /> -->
+    <link rel="stylesheet" href="/public/style.css" type="text/css" media="screen" />
+  </head>
+  <body>
+    <div class="contain">
+      <div class="main">
+        <h1>4'33"</h1>
+        <button onclick="startRecording(this);">record</button>
+        <button onclick="stopRecording(this);" disabled>stop</button>
+
+        <section class="timer">
+          <p>
+            <span class="minute"></span> Minutes &
+            <span class="second"></span> Seconds left.
+          </p>
+        </section>
+        <section class="upload">
+          <form method="post" id="uploadAudio" action="/upload" enctype="multipart/form-data">
+            <input  type="file" name="audio" value="" />
+            <button type="submit">Submit</button>
+          </form>
+          <a href="javascript:void(0)" class="upload">upload</a>
+          <progress></progress>
+        </section>
+        <section class="player">
+        </section>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="public/lib/countdown/countdown.min.js"></script>
+    <script type="text/javascript" src="public/lib/recorder.js"></script>
+    <script type="text/javascript" src="public/index.js"></script>
+  </body>
+</html>

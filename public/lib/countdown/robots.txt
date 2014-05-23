@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /lib/*
+Disallow: /test/*
+Disallow: /LICENSE.txt
+
+#http://www.robotstxt.org/wc/exclusion.html#robotstxt
