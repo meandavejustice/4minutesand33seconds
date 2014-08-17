@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+  <head>
+    <!-- <link rel="stylesheet" href="style.css" type="text/css" media="screen" /> -->
+    <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+  </head>
+  <body>
+    <div class="contain">
+      <header class="header clearfix">
+        <h1>4&#145;33&#148;</h1>
+
+        <div class="nav">
+          <input type="checkbox" id="toggle" />
+          <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu" onclick></label>
+
+          <ul class="menu">
+            <li><a href="#about" class="call-modal">About</a></li>
+            <li><a href="#help" class="call-modal">Help</a></li>
+          </ul>
+        </div>
+
+        <section class="control">
+          <button class="btn start">record</button>
+          <button class="btn stop" disabled>stop</button>
+        </section>
+
+      </header>
+
+      <div class="main">
+        <canvas id="fft" width="800px" height="300px"></canvas>
+        <canvas id="wave" width="600px" height="200px"></canvas>
+        <section class="description">
+          <h3>Record your own version!</h3>
+          <p>You can finally record your own version of John Cage's avant garde hit, Four Minutes
+          and thirty-three seconds.</p>
+
+          <h4>Rules</h4>
+          <ul>
+            <li>You cannot play any instruments</li>
+            <li>You cannot talk</li>
+            <li>You cannot sing</li>
+            <li>Don't make any noise</li>
+          </ul>
+          <p>If you are detected not following these rules, you will be forced to
+          restart your session.</p>
+        </section>
+        <section class="timer">
+          <p>
+            <span class="minute"></span> Minutes &
+            <span class="second"></span> Seconds left.
+          </p>
+        </section>
+        <section class="upload">
+          <a href="javascript:void(0)" class="upload">upload</a>
+          <progress></progress>
+        </section>
+        <section class="player"></section>
+
+        <section class="renditions"></section>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="lib/recorder.js"></script>
+    <script type="text/javascript" src="bundle.js"></script>
+  </body>
+</html>

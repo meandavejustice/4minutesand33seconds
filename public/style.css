@@ -1,8 +1,169 @@
 .contain {
   width: 100%;
+  font-family: monospace;
 }
 
 .main {
   margin: 80px auto;
   width: 50%;
 }
+
+.btn {
+  background: #eee;
+  padding: 8px 14px;
+  font-size: 16px;
+}
+
+
+/*
+ * This is a Fork of Navigataur from Mike King (@mixjamking)
+ *
+ */
+.header {
+  position: relative; }
+
+#toggle, .toggle {
+  display: none; }
+
+.menu > li {
+  list-style: none;
+  float: left; }
+
+/* Nicolas Gallagher micro clearfix */
+.clearfix:before, .clearfix:after {
+  display: table;
+  content: ""; }
+
+.clearfix:after {
+  clear: both; }
+
+@media only screen and (max-width: 768px) {
+  .menu {
+    display: none;
+    opacity: 0;
+    width: 100%;
+    position: absolute;
+    right: 0; }
+    .menu > li {
+      display: block;
+      width: 100%;
+      margin: 0; }
+      .menu > li > a {
+        display: block;
+        width: 100%;
+        text-decoration: none;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box; }
+  .toggle {
+    display: block;
+    position: relative;
+    cursor: pointer; }
+  #toggle:checked ~ .menu {
+    display: block;
+    opacity: 1;
+    z-index: 10000; } }
+
+.header {
+  min-height: 80px;
+  height: 100%;
+  padding: 0 20px;
+  background: #dddddd;
+  box-shadow: 4px 5px 9px 5px #858585;
+  max-width: 1260px;
+  margin: 20px auto;
+}
+.header > h1 {
+  float: left;
+  padding: 0;
+  text-shadow: 4px 4px 7px #000;
+  font-size: 51px;
+  font-weight: lighter;
+  margin: 35px 10px 15px;
+  font-family: inherit;
+  color: inherit; }
+
+.header .control {
+  float: right;
+}
+
+.control .btn {
+  margin-top: 42px;
+}
+
+.nav {
+  display: block;
+  float: right;
+  text-align: center; }
+
+.nav, .menu, .menu > li, .menu > li > a {
+  max-height: 80px;
+  height: 100%; }
+
+.menu > li > a {
+  display: block;
+  padding: 20px;
+  text-decoration: none;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 1;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+  .menu > li > a:hover, .menu > li > a:focus {
+    background: #ddd;
+    color: #3ABB92; }
+  .menu > li > a.submit {
+    display: inline;
+    padding: 0px; }
+
+.toggle {
+  z-index: 2;
+  display: inline-block; }
+
+@media only screen and (max-width: 768px) {
+  .header h1 {
+    display: inline-block; }
+  .menu {
+    background: #dddddd;
+    border-top: 1px solid #969595; }
+    .menu .nav {
+      float: right;
+      display: inline-block !important; }
+  .menu, .menu > li {
+    background: #dddddd;
+    border-bottom: 1px solid #B3B3B3;
+    height: auto; }
+  .menu > li > a {
+    height: auto;
+    padding: 15px 15px; }
+  .menu > li > a:hover, .menu > li > a:focus {
+    background-color: #F2F2F2; }
+  .toggle:after {
+    content: '☰';
+    display: block;
+    margin: 22px;
+    padding: 4px 8px;
+    background: #A0A0A0;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    text-align: center;
+    font-size: 19px;
+    font-weight: bold;
+    color: #000000;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; }
+  .toggle:hover:after {
+    background: #808080; }
+  #toggle:checked + .toggle:after {
+    color: #000; } }
+
+@media only screen and (max-width: 479px) {
+  .header > h1 {
+    text-align: center; }
+  .header > h1, .toggle:after {
+    float: left; }
+  .toggle:after {
+    text-align: center;
+    margin-right: 0px; } }

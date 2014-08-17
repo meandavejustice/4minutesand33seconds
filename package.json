@@ -2,9 +2,11 @@
   "name": "4minutesand33seconds",
   "version": "0.0.0",
   "description": "4minutesand33seconds ====================",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-js": "browserify -o public/bundle.js -v public/main.js",
+    "start": "watchify -o public/bundle.js -v -d public/main.js & nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -17,10 +19,14 @@
   },
   "homepage": "https://github.com/meandavejustice/4minutesand33seconds",
   "dependencies": {
-    "express": "^4.0.0",
+    "browserify": "^5.10.0",
+    "knox": "^0.9.0",
     "logfmt": "^1.1.2",
-    "keep-alive": "^0.1.0",
-    "countdown": "^2.3.0",
-    "dropbox": "^0.10.2"
+    "mime": "^1.2.11",
+    "multiparty": "^3.2.7",
+    "routes-router": "^4.1.0",
+    "s3-upload-stream": "^0.6.0",
+    "send-data": "^3.3.2",
+    "st": "^0.5.1"
   }
 }
