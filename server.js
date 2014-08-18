@@ -24,7 +24,7 @@ app.addRoute("/upload", function (req, res, opts, cb) {
     }
   }, function (err, values) {
     if (err) {
-      return cb(err);
+      console.log('error in multipart form', err);
     }
     console.log('File uploaded succesfully');
   });

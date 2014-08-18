@@ -1,4 +1,5 @@
 /* global Recorder */
+var canvas2blob = require('canvas2blob');
 var audioContext = require('./lib/audioContext')();
 var drawBuffer = require('./lib/drawWAV');
 var FFT = require('./lib/fft');
@@ -12,7 +13,7 @@ var player = document.querySelector('section.player');
 var minutesEl = document.querySelector('.timer .minute');
 var secondsEl = document.querySelector('.timer .second');
 
-var timeouts = {}, recorder, globalBlob, remainingSeconds;
+var timeouts = {}, recorder, globalAudioBlob, globalImgBlob, remainingSeconds;
 var FOUR_MINUTES_AND_THIRTY_THREE_SECONDS = 10000;
 // var FOUR_MINUTES_AND_THIRTY_THREE_SECONDS = 273000;
 
@@ -55,6 +56,8 @@ function mySetTimeout(func, timeout) {
 }
 
 function drawWAV() {
+  waveEl.style.display = 'block';
+
   recorder.getBuffer(function(bufs) {
     if (!bufs[0].length) return;
     var newBuffer = audioContext.createBuffer( 2, bufs[0].length, audioContext.sampleRate );
@@ -69,7 +72,7 @@ function createDownloadLink() {
   recorder.exportWAV(function (blob){
     // sometimes the array buffer is returned here :(
     if (blob.length) return;
-    globalBlob = blob;
+    globalAudioBlob = blob;
     uploadButton.style.display = 'block';
 
     var url = URL.createObjectURL(blob);
@@ -116,10 +119,9 @@ function startRecording(ev) {
   }, 200);
 }
 
-function uploadAudio(blob) {
+function upload(blob, filename) {
   var xhr = new XMLHttpRequest(),
   fd = new FormData();
-  var filename = '4minutesand33seconds-' + new Date() + '.mp3';
 
   fd.append( 'file', blob, filename);
   xhr.open('POST', '/upload');
@@ -135,8 +137,10 @@ function addListeners() {
   stopButton.addEventListener('click', stopRecording);
 
   uploadButton.addEventListener('click', function(ev) {
-    if (globalBlob) {
-      uploadAudio(globalBlob);
+    if (globalAudioBlob) {
+      var prefix = '4minutesand33seconds-' + new Date();
+      // upload(globalAudioBlob, prefix + '.wav');
+      upload(canvas2blob(waveEl), prefix + '.png');
     } else {
       window.alert('you must record something first');
     }

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-js": "browserify -o public/bundle.js -v public/main.js",
-    "start": "watchify -o public/bundle.js -v -d public/main.js & nodemon server.js"
+    "start": "watchify -o public/bundle.js -v -d public/main.js & S3ID=`heroku config:get S3ID` S3SECRET=`heroku config:get S3SECRET` nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   "homepage": "https://github.com/meandavejustice/4minutesand33seconds",
   "dependencies": {
     "browserify": "^5.10.0",
+    "canvas2blob": "^0.1.0",
     "knox": "^0.9.0",
     "logfmt": "^1.1.2",
     "mime": "^1.2.11",
