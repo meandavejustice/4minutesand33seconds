@@ -138,8 +138,8 @@ function addListeners() {
 
   uploadButton.addEventListener('click', function(ev) {
     if (globalAudioBlob) {
-      var prefix = '4minutesand33seconds-' + new Date();
-      // upload(globalAudioBlob, prefix + '.wav');
+      var prefix = '4minutesand33seconds-' + new Date()
+      upload(globalAudioBlob, prefix + '.wav');
       upload(canvas2blob(waveEl), prefix + '.png');
     } else {
       window.alert('you must record something first');
