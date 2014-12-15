@@ -1,10 +1,11 @@
 /* global Recorder */
+var getUserMedia = require('getusermedia');
+var Vex = require('vexflow');
 var canvas2blob = require('canvas2blob');
 var audioContext = require('./lib/audioContext')();
 var drawBuffer = require('./lib/drawWAV');
 var FFT = require('./lib/fft');
 
-var waveEl = document.getElementById('wave');
 var stopButton = document.querySelector('.stop');
 var startButton = document.querySelector('.start');
 var uploadButton = document.querySelector('.upload');
@@ -13,11 +14,22 @@ var player = document.querySelector('section.player');
 var minutesEl = document.querySelector('.timer .minute');
 var secondsEl = document.querySelector('.timer .second');
 
+var waveEl = document.getElementById('wave');
+
+var sheetContain = document.getElementById('sheet');
+var sheetCanvasEl = sheetContain.querySelector('canvas');
+
+var renderer = new Vex.Flow.Renderer(sheetCanvasEl, Vex.Flow.Renderer.Backends.CANVAS);
+
 var timeouts = {}, recorder, globalAudioBlob, globalImgBlob, remainingSeconds;
 var FOUR_MINUTES_AND_THIRTY_THREE_SECONDS = 10000;
 // var FOUR_MINUTES_AND_THIRTY_THREE_SECONDS = 273000;
 
 var wavegfx = waveEl.getContext('2d');
+
+var ctx = renderer.getContext();
+var stave = new Vex.Flow.Stave(10, 0, 5000);
+stave.addClef("treble").setContext(ctx).draw();
 
 var fft = new FFT(audioContext, {
   canvas: document.getElementById('fft'),
@@ -36,13 +48,17 @@ function prettyTime(milliseconds) {
 function startMedia(stream) {
   var input = audioContext.createMediaStreamSource(stream);
 
-  recorder = new Recorder(input);
   if (recorder) {
     audioContext = recorder.context;
   }
 
   input.connect(fft.input);
-  fft.connect(audioContext.destination);
+  // throw away gain node
+  var gainNode = audioContext.createGain();
+  gainNode.gain.value = 0;
+  fft.connect(gainNode);
+  gainNode.connect(audioContext.destination);
+  recorder = new Recorder(input);
 }
 
 function mySetTimeout(func, timeout) {
@@ -102,21 +118,24 @@ function stopRecording(ev) {
 }
 
 function startRecording(ev) {
-  recorder.record();
-  startButton.disabled = true;
-  stopButton.disabled = false;
-  var remainingTime;
-  var interval;
+  getUserMedia({video: true, audio:true}, function (err, stream) {
+    startMedia(stream);
+    recorder.record();
+    startButton.disabled = true;
+    stopButton.disabled = false;
+    var remainingTime;
+    var interval;
 
-  remainingSeconds = mySetTimeout(function(){
-    clearInterval(interval);
-    stopRecording();
-  }, FOUR_MINUTES_AND_THIRTY_THREE_SECONDS);
+    remainingSeconds = mySetTimeout(function(){
+      clearInterval(interval);
+      stopRecording();
+    }, FOUR_MINUTES_AND_THIRTY_THREE_SECONDS);
 
-  interval = setInterval(function() {
-    remainingTime = timeouts[remainingSeconds].end - new Date().getTime();
-    prettyTime(remainingTime);
-  }, 200);
+    interval = setInterval(function() {
+      remainingTime = timeouts[remainingSeconds].end - new Date().getTime();
+      prettyTime(remainingTime);
+    }, 200);
+  });
 }
 
 function upload(blob, filename) {
@@ -124,41 +143,27 @@ function upload(blob, filename) {
   fd = new FormData();
 
   fd.append( 'file', blob, filename);
-  xhr.open('POST', '/upload');
+  xhr.open('PUT', '/upload');
+  progressBar.style.display = 'block';
   xhr.upload.onprogress = function(ev) {
     progressBar.setAttribute('value', ev.loaded);
     progressBar.setAttribute('max', ev.total);
+    if (ev.loaded === ev.total) {
+      progressBar.setAttribute('value', 0);
+      progressBar.style.display = 'none';
+    }
   };
   xhr.send( fd );
 }
 
-function addListeners() {
-  startButton.addEventListener('click', startRecording);
-  stopButton.addEventListener('click', stopRecording);
-
-  uploadButton.addEventListener('click', function(ev) {
-    if (globalAudioBlob) {
-      var prefix = '4minutesand33seconds-' + new Date()
-      upload(globalAudioBlob, prefix + '.wav');
-      upload(canvas2blob(waveEl), prefix + '.png');
-    } else {
-      window.alert('you must record something first');
-    }
-  }, false);
-}
-
-window.onload = function init() {
-  try {
-    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
-    window.URL = window.URL || window.webkitURL;
-
-  } catch (e) {
-    window.alert("No Web audio support in this browser");
+startButton.addEventListener('click', startRecording);
+stopButton.addEventListener('click', stopRecording);
+uploadButton.addEventListener('click', function(ev) {
+  if (globalAudioBlob) {
+    var prefix = new Date().toISOString();
+    upload(globalAudioBlob, prefix + '.wav');
+    upload(canvas2blob(waveEl), prefix + '.png');
+  } else {
+    window.alert('you must record something first');
   }
-
-  navigator.getUserMedia({audio: true}, startMedia, function (e) {
-    console.log(e);
-  });
-
-  addListeners();
-};
+}, false);

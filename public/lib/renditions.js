@@ -3,7 +3,7 @@ var seenFiles = {};
 
 function renderFiles(files) {
   files.forEach(function(file) {
-    if (seenFiles[file.filename]) return;
+    if (!!~file.filename.indexOf('.png') || seenFiles[file.filename]) return;
     var au = renderPlayer(file);
     renditions.appendChild(au);
   });

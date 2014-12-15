@@ -15,7 +15,7 @@ filetracker.freshList();
 var app = Router();
 
 app.addRoute("/upload", function (req, res, opts, cb) {
-  var form = MultipartyForm(req, res, {
+  MultipartyForm(req, res, {
     handlePart: function(part) {
       send2s3(part, function(err, filename) {
         if (err) console.log(err);

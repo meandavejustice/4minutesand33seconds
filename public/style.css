@@ -1,5 +1,13 @@
 body {
-    background: #88F988;
+    background: #D6F6D6;
+}
+
+a {
+    color: #FF9A2F;
+}
+
+a:hover {
+    color: #5AFD94;
 }
 
 .contain {
@@ -75,9 +83,9 @@ body {
   min-height: 80px;
   height: 100%;
   padding: 0 20px;
-  background: #dddddd;
-  box-shadow: 4px 5px 9px 5px #858585;
-  max-width: 1260px;
+  background: #DDD;
+  box-shadow: 8px 8px 1px 5px #A6A6A6;
+  max-width: 1100px;
   margin: 20px auto;
 }
 .header > h1 {
@@ -118,8 +126,8 @@ body {
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
   .menu > li > a:hover, .menu > li > a:focus {
-    background: #ddd;
-    color: #3ABB92; }
+    background: #B7B7B7;
+  }
   .menu > li > a.submit {
     display: inline;
     padding: 0px; }
@@ -174,3 +182,23 @@ body {
   .toggle:after {
     text-align: center;
     margin-right: 0px; } }
+
+
+blockquote {  
+    background: #f9f9f9;
+    border-left: 10px solid #ccc;
+    margin: 1.5em 10px;
+    padding: 1.5em 10px;
+    quotes: "\201C""\201D""\2018""\2019";
+}
+blockquote:before {
+    color: #ccc;
+    content: open-quote;
+    font-size: 4em;
+    line-height: .1em;
+    margin-right: .25em;
+    vertical-align: -.4em;
+}
+blockquote p {
+    display: inline;
+}
