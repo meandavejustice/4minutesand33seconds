@@ -2,11 +2,23 @@ var renditions = document.querySelector('.renditions');
 var seenFiles = {};
 
 function renderFiles(files) {
+  renditions.style.width = files.length * 307;
+
   files.forEach(function(file) {
     if (!!~file.filename.indexOf('.png') || seenFiles[file.filename]) return;
-    var au = renderPlayer(file);
-    renditions.appendChild(au);
+    var contain = document.createElement('div');
+    contain.classList.add('rendition');
+    contain.appendChild(renderWave(file));
+    contain.appendChild(renderPlayer(file));
+    renditions.appendChild(contain);
   });
+}
+
+function renderWave(file) {
+  var img = document.createElement('img');
+  img.src = file.url.replace('.wav', '.png');
+
+  return img;
 }
 
 function renderPlayer(file) {

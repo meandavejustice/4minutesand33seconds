@@ -33,5 +33,9 @@
     "st": "^0.5.1",
     "streaming-s3": "^0.3.2",
     "vexflow": "^1.2.26"
+  },
+  "devDependencies": {
+    "nodemon": "^1.2.1",
+    "watchify": "^2.2.1"
   }
 }

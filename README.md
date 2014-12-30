@@ -3,18 +3,18 @@
 
 4'33"
 
+record your own version of John Cage's 4'33"
 
-# installation
-
-* npm install
-* npm run start
 
 # Running locally
 
-You'll need to set process.env variables for Amazon s3
-`S3ID=AWS-KEY-HERE S3SECRET=AWS-SECRET-HERE node server.js`
+you will need to create a file, `config.json` which will contain
+all of your s3 keys etc...
 
-I do this by running:
 ``` shell
-S3ID=`heroku config:get S3ID` S3SECRET=`heroku config:get S3SECRET` nodemon server.js
+  touch config.json && echo {"accessKeyId": "key id", \
+  "secretAccessKey": "key secret", \
+  "region": "us-west-2"} >> config.json
 ```
+* `npm install`
+* `npm start`

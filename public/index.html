@@ -28,13 +28,27 @@
       </header>
 
       <div class="main">
-        <div>
+        <div class="freq" style="display:none;">
           <canvas id="fft" width="800px" height="200px"></canvas>
         </div>
         <div id="sheet">
           <canvas width="800px" height="100px"></canvas>
         </div>
+
         <canvas id="wave" width="800px" height="100px"></canvas>
+        <section class="timer">
+          <p>
+            <span class="minute"></span> Minutes &
+            <span class="second"></span> Seconds left.
+          </p>
+        </section>
+        <section class="upload">
+          <button class="btn upload">upload</button>
+          <progress style="display:none;"></progress>
+          <section class="player"></section>
+        </section>
+        
+
         <section class="description">
           <h3>Record your own version!</h3>
           <p>You can finally record your own version of John Cage's avant garde hit, Four Minutes
@@ -91,19 +105,10 @@
             </p>
           </blockquote>
         </section>
-        <section class="timer">
-          <p>
-            <span class="minute"></span> Minutes &
-            <span class="second"></span> Seconds left.
-          </p>
-        </section>
-        <section class="upload">
-          <a href="javascript:void(0)" class="upload">upload</a>
-          <progress style="display:none;"></progress>
-        </section>
-        <section class="player"></section>
 
-        <section class="renditions"></section>
+        <section class="renditions-wrap">
+          <section class="renditions"></section>
+        </section>
       </div>
     </div>
 

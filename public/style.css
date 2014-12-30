@@ -202,3 +202,26 @@ blockquote:before {
 blockquote p {
     display: inline;
 }
+
+.renditions-wrap {
+    width: 100%;
+    overflow-x: scroll;
+}
+
+.renditions {
+    width: 5000px;
+}
+
+.rendition {
+    width: 300px;
+    background: #FFF;
+    border-radius: 2px;
+    float: left;
+    display: inline-block;
+    margin: 0 5px;
+    border: 1px solid;
+}
+
+.rendition img {
+    width: 100%;
+}

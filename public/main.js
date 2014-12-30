@@ -5,7 +5,10 @@ var canvas2blob = require('canvas2blob');
 var audioContext = require('./lib/audioContext')();
 var drawBuffer = require('./lib/drawWAV');
 var FFT = require('./lib/fft');
+var getFiles = require('./lib/renditions');
 
+var renditionsEl = document.querySelector('.renditions');
+var freqContain = document.querySelector('.freq');
 var stopButton = document.querySelector('.stop');
 var startButton = document.querySelector('.start');
 var uploadButton = document.querySelector('.upload');
@@ -22,6 +25,7 @@ var sheetCanvasEl = sheetContain.querySelector('canvas');
 var renderer = new Vex.Flow.Renderer(sheetCanvasEl, Vex.Flow.Renderer.Backends.CANVAS);
 
 var timeouts = {}, recorder, globalAudioBlob, globalImgBlob, remainingSeconds;
+// int for testing
 var FOUR_MINUTES_AND_THIRTY_THREE_SECONDS = 10000;
 // var FOUR_MINUTES_AND_THIRTY_THREE_SECONDS = 273000;
 
@@ -37,8 +41,7 @@ var fft = new FFT(audioContext, {
   fillStyle: '#333'
 });
 
-var getFiles = require('./lib/renditions');
-getFiles();
+setInterval(getFiles, 5000);
 
 function prettyTime(milliseconds) {
   secondsEl.innerHTML = parseInt((milliseconds / 1000) % 60, 10);
@@ -58,6 +61,7 @@ function startMedia(stream) {
   gainNode.gain.value = 0;
   fft.connect(gainNode);
   gainNode.connect(audioContext.destination);
+  freqContain.style.display = 'block';
   recorder = new Recorder(input);
 }
 
@@ -118,7 +122,7 @@ function stopRecording(ev) {
 }
 
 function startRecording(ev) {
-  getUserMedia({video: true, audio:true}, function (err, stream) {
+  getUserMedia({audio:true}, function (err, stream) {
     startMedia(stream);
     recorder.record();
     startButton.disabled = true;
