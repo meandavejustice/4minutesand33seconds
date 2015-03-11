@@ -26,8 +26,8 @@ var renderer = new Vex.Flow.Renderer(sheetCanvasEl, Vex.Flow.Renderer.Backends.C
 
 var timeouts = {}, recorder, globalAudioBlob, globalImgBlob, remainingSeconds;
 // int for testing
-var FOUR_MINUTES_AND_THIRTY_THREE_SECONDS = 10000;
-// var FOUR_MINUTES_AND_THIRTY_THREE_SECONDS = 273000;
+// var FOUR_MINUTES_AND_THIRTY_THREE_SECONDS = 10000;
+var FOUR_MINUTES_AND_THIRTY_THREE_SECONDS = 273000;
 
 var wavegfx = waveEl.getContext('2d');
 
