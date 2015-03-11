@@ -7,7 +7,7 @@ var send2s3 = require("./lib/send2s3.js");
 var MultipartyForm = require("./lib/multipart-form.js");
 var filetracker = require("./lib/filetracker.js");
 
-var port = Number(process.env.PORT || 3000);
+var port = Number(require('./config.json').port || 3000);
 
 // bootstrap the filelist
 filetracker.freshList();

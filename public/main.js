@@ -33,7 +33,7 @@ var wavegfx = waveEl.getContext('2d');
 
 var ctx = renderer.getContext();
 var stave = new Vex.Flow.Stave(10, 0, 5000);
-stave.addClef("treble").setContext(ctx).draw();
+stave.addClef("treble").addTimeSignature("4/4").setContext(ctx).draw();
 
 var fft = new FFT(audioContext, {
   canvas: document.getElementById('fft'),
